@@ -8,7 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Scanner;
 
+import Services.ContractService;
+import Services.PaypalService;
 import entities.Contract;
+import entities.Installment;
 
 public class Program {
 
@@ -26,8 +29,20 @@ public class Program {
 		double totalValue= sc.nextDouble();
 		
 		Contract obj = new Contract(number, date, totalValue);
+		System.out.print("Entre com o numero de parcelas: ");
+		int n = sc.nextInt();
 		
-		System.out.println("O numero do seu contrato é "+number+"A data inicial e "+ date+ "E o valor do contrato é "+totalValue );
+		ContractService contractService = new ContractService(new PaypalService());
+		
+		contractService.processContract(obj, n);
+		
+		System.out.println("Parcelas:");
+		for ( Installment installment : obj.getInstallments()) {
+			System.out.println(installment);
+		}
+		
+		sc.close();	
+		//System.out.println("O numero do seu contrato é "+number+"A data inicial e "+ date+ "E o valor do contrato é "+totalValue );
 	}
 
 }
