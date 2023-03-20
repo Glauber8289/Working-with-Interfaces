@@ -39,7 +39,7 @@ public class Program {
 		System.out.println("Parcelas:");
 		for ( Installment installment : obj.getInstallments()) {
 			System.out.println(installment);
-			System.out.println(ctd);
+			
 		}
 		
 		sc.close();	
